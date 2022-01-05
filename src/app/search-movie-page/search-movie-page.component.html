@@ -1,0 +1,38 @@
+<div class="container-fluid mt-3 mb-3">
+    <div class="row">
+        <div class="col-auto mb-3">
+            <a [routerLink]="['/home']" routerLinkActive="active" style="text-decoration: none;">Home</a>
+        </div>
+        <div class="col-auto">
+            <img src="../../assets/right-arrow.png" alt="">
+        </div>
+        <div class="col-auto">
+            <span class="text-primary">{{ totalResults }}</span>
+            <span> search results for </span>
+            <span class="text-primary font-weight-bold">{{ query }}</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-lg-3" *ngFor="let movie of movies">
+            <!-- Bootstrap 5 card box -->
+            <div class="card-box" [routerLink]="['/movie/'+movie.id]" routerLinkActive="active">
+                <div class="card-thumbnail">
+                    <img src="https://image.tmdb.org/t/p/w500{{movie.poster_path}}" class="img-fluid" alt="">
+                </div>
+                <h3 class="mt-2 text-primary">{{ movie.title }}</h3>
+                <p class="mt-1 text-secondary">{{ movie.release_date }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-md-center my-3">
+        <div class="col-lg-2">
+            <button type="button" [disabled]="page == 1" class="btn btn-info btn-block" (click)="goPage(-1)">Previous</button>
+        </div>
+        <div class="col col-lg-2 text-center text-primary font-weight-bold mt-1">
+            {{ page }} of {{ totalPages }}
+        </div>
+        <div class="col-lg-2">
+            <button type="button" [disabled]="page == totalPages" class="btn btn-info btn-block" (click)="goPage(1)">Next</button>
+        </div>
+    </div>
+</div>
